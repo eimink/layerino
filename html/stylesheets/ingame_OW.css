@@ -1,0 +1,92 @@
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-backface-visibility: hidden;
+	-webkit-transition: translate3d(0, 0, 0);
+}
+
+@font-face {
+	font-family: "BigNoodleToo";
+	src: url(../font/bignoodletoo.woff);
+}
+
+html, body {
+	width: 1920px;
+	height: 1080px;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased !important;
+}
+
+body {
+	font-family: "BigNoodleToo";
+	font-size: 36px;
+	color: #FFF;
+	background-size: cover;
+}
+
+#main {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 43px;
+	background-image: url(../images/ingame_OW.png);
+}
+
+#TeamLeftName {
+	position: absolute;
+    display: inline-block;
+	top: 2px;
+    width: 750px;
+    text-align: right;
+}
+
+#TeamRightName {
+	position: absolute;
+    display: inline-block;
+	left: 1170px;
+	width: 700px;
+	top: 2px;
+}
+
+#TeamLeftScore {
+	position: absolute;
+    display: inline-block;
+	left: 770px;
+	top: 0;
+    width: 50px;
+	text-align: center;
+}
+
+#TeamRightScore {
+	position: absolute;
+    display: inline-block;
+	left: 1107px;
+	top: 0;
+    width: 50px;
+	text-align: center;
+}
+
+#center_logo {
+	position: absolute;
+	width: 1920px;
+	height: 40px;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-image: url(../images/thekaupunkisota.png);
+}
+
+#side_logo {
+    position: absolute;
+	top: 3px;
+    left: 1750px;
+    height: 40px;
+    width: 200px;
+    background-image: url(../images/ingame_OW_ksota.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,26 @@
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-backface-visibility: hidden;
+	-webkit-transition: translate3d(0, 0, 0);
+}
+
+html, body {
+	width: 1920px;
+	height: 1080px;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased !important;
+}
+
+body {
+	font-family: "Calibri", "Arial";
+	color: #FFF;
+}
+
+@font-face {
+	font-family: ROGFont;
+	src: url(../Fonts/ROGFont.otf);
+}
