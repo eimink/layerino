@@ -24,6 +24,7 @@ namespace layerino
 
             InitializeComponent();
             wssv = new WebSocketServer(14329);
+            wssv.Log.Level = LogLevel.Fatal;
             wssv.AddWebSocketService<LayerinoWebSocket>("/layerino");
             wssv.Start();
         }
@@ -74,12 +75,12 @@ namespace layerino
             if (this.toggleTopBar.Text.Contains("Show"))
             {
                 this.toggleTopBar.Text = "Hide top bar";
-                // TODO: Add websocket message to show bar
+                wssv.WebSocketServices.Broadcast("MainFadeIn");
             }
             else
             {
                 this.toggleTopBar.Text = "Show top bar";
-                // TODO: Add websocket message to hide bar
+                wssv.WebSocketServices.Broadcast("MainFadeOut");
             }
         }
 
