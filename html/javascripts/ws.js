@@ -1,6 +1,8 @@
+var ws = null;
+
 function initializeWebsocket()
 {
-    var ws = new WebSocket("ws://localhost:14329/layerino");
+    ws = new WebSocket("ws://localhost:14329/layerino");
 
     ws.onopen = function () {
         ws.send("FRONT_CONNECT");
@@ -16,10 +18,27 @@ function initializeWebsocket()
     };
 }
 
+function checkWebsocket(){
+    if(!ws || ws.readyState === WebSocket.CLOSED) initializeWebsocket();
+  }
 
-function layerinoUpdate(json_input) {
-    var data = JSON.parse(json_input);
-    $.each(data, function (element_id, value) {
-        $("#"+element_id).html(value);
-    });
+function mainFadeIn() {
+    $("#main").fadeIn();
 }
+
+function mainFadeOut() {
+    $("#main").fadeOut();
+}
+
+function layerinoUpdate(socketInput) {
+    if (socketInput === "MainFadeIn") mainFadeIn();
+    else if (socketInput === "MainFadeOut") mainFadeOut();
+    else {
+        var data = JSON.parse(socketInput);
+        $.each(data, function (element_id, value) {
+            $("#"+element_id).html(value);
+        });
+    }
+}
+
+setInterval(checkWebsocket, 5000);
