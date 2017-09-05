@@ -205,6 +205,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LayerinoForm";
             this.Text = "eimink\'s layerino";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LayerinoForm_FormClosing);
+            this.Load += new System.EventHandler(this.LayerinoForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -10,19 +10,30 @@ using System.Windows.Forms;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace layerino
 {
     public partial class LayerinoForm : Form
     {
         private WebSocketServer wssv;
-        private bool invertTeams = false; 
+        private bool invertTeams = false;
+
+        private GlobalHotkey[] ghks;
 
         public LayerinoForm()
         {
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
 
             InitializeComponent();
+            ghks = new GlobalHotkey[7];
+            ghks[0] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D4, this);
+            ghks[1] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D5, this);
+            ghks[2] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D6, this);
+            ghks[3] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D7, this);
+            ghks[4] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D8, this);
+            ghks[5] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D9, this);
+            ghks[6] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D0, this);
             wssv = new WebSocketServer(14329);
             wssv.Log.Level = LogLevel.Fatal;
             wssv.AddWebSocketService<LayerinoWebSocket>("/layerino");
@@ -34,14 +45,81 @@ namespace layerino
             wssv.Stop();
         }
 
+        private int GetHotKeyHash(int lpInt)
+        {
+            int key = (lpInt >> 16) & 0xFFFF;
+            int modifier = lpInt & 0xFFFF;
+            return modifier ^ key ^ this.Handle.ToInt32();
+        }
+
+        private void HandleHotkeys(int key)
+        {
+            int hotkeyIndex = -1;
+            try
+            {
+                hotkeyIndex = Array.FindIndex(ghks, delegate (GlobalHotkey k) { return k.GetHashCode() == key; });
+            }
+            catch (ArgumentNullException e)
+            {
+            }
+            finally
+            {
+                switch (hotkeyIndex)
+                {
+                    case 0:
+                        Team1ScoreInc_Click(this, null);
+                        break;
+                    case 1:
+                        Team1ScoreDec_Click(this, null);
+                        break;
+                    case 2:
+                        Team2ScoreInc_Click(this, null);
+                        break;
+                    case 3:
+                        Team2ScoreDec_Click(this, null);
+                        break;
+                    case 4:
+                        SwapTeams_Click(this, null);
+                        break;
+                    case 5:
+                        RefreshButton_Click(this, null);
+                        break;
+                    case 6:
+                        ToggleTopBar_Click(this, null);
+                        break;
+                }
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+                HandleHotkeys(GetHotKeyHash((int)m.LParam));
+            base.WndProc(ref m);
+        }
+
         public void OnClientConnected()
         {
             SendWebsocketDataRefresh();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void LayerinoForm_Load(object sender, EventArgs e)
         {
+            for (int i = 0; i < ghks.Length; i++)
+            {
+                if (ghks[i].Register())
+                    Console.WriteLine("Hotkey registered!");
+                else
+                    Console.WriteLine("Unable to register hotkey!");
+            }
+        }
 
+        private void LayerinoForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            for (int i = 0; i < ghks.Length; i++)
+            {
+                ghks[i].Unregister();
+            }
         }
 
         private string BuildDataForRefresh()

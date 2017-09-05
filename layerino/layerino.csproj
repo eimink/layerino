@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="GlobalHotkey.cs" />
     <Compile Include="LayerinoWebSocket.cs" />
     <Compile Include="LayerinoForm.cs">
       <SubType>Form</SubType>
