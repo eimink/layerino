@@ -28,6 +28,7 @@ namespace layerino
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
             
             InitializeComponent();
+            CheckDirectories();
             ghks = new GlobalHotkey[7];
             ghks[0] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D4, this);
             ghks[1] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D5, this);
@@ -52,14 +53,22 @@ namespace layerino
         {
             if (!Directory.Exists(Directory.GetCurrentDirectory() + Config.LogoDirectory))
             {
-                Directory.CreateDirectory(Directory.GetCurrentDirectory() + Config.LogoDirectory);
+                string logoDir = Directory.GetCurrentDirectory() + Config.LogoDirectory;
+                Directory.CreateDirectory(logoDir);
             }
-            
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + Config.BackgroundDirectory))
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + Config.BackgroundDirectory);
+            }
+
         }
 
         private void SetLogoBoxItems()
         {
-            logoFiles = new FileListing(Directory.GetCurrentDirectory() + Config.LogoDirectory);
+            logoFiles = new FileListing();
+            logoFiles.Add(Config.DefaultHomeLogo, "default_home", false);
+            logoFiles.Add(Config.DefaultAwayLogo, "default_away", false);
+            logoFiles.ParseDirectory(Directory.GetCurrentDirectory() + Config.LogoDirectory);
             foreach (string fn in logoFiles.GetFileNames())
             {
                 logoBox1.Items.Add(fn);
@@ -163,8 +172,8 @@ namespace layerino
 
             this.Invoke((MethodInvoker)delegate ()
             {
-                homeTeamLogo = new System.Uri(logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo)).AbsoluteUri;
-                awayTeamLogo = new System.Uri(logoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), Config.DefaultAwayLogo)).AbsoluteUri;
+                homeTeamLogo = GetURIForLayer(GetHomeLogoPath());
+                awayTeamLogo = GetURIForLayer(GetAwayLogoPath());
             });
 
             if (!invertTeams)
@@ -265,10 +274,9 @@ namespace layerino
 
         private void Team1Logo_Changed(object sender, EventArgs e)
         {
-            Console.WriteLine("logo1");
             if (pictureBox1.Image != null)
                 pictureBox1.Image.Dispose();
-            pictureBox1.Image = (Image)Image.FromFile(logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo)).Clone();
+            pictureBox1.Image = GetImage(GetHomeLogoPath());
             pictureBox1.Update();
             pictureBox1.Refresh();
         }
@@ -277,7 +285,7 @@ namespace layerino
         {
             if (pictureBox2.Image != null)
                 pictureBox2.Image.Dispose();
-            pictureBox2.Image = (Image)Image.FromFile(logoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), Config.DefaultAwayLogo)).Clone();
+            pictureBox2.Image = GetImage(GetAwayLogoPath());
             pictureBox2.Update();
             pictureBox2.Refresh();
         }
@@ -295,6 +303,32 @@ namespace layerino
         private void Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private Image GetImage(Info info)
+        {
+            if (info.isFile)
+                return (Image)Image.FromFile(info.path).Clone();
+            else
+                return (Image)((Image)Properties.Resources.ResourceManager.GetObject(info.path)).Clone();
+        }
+
+        private string GetURIForLayer(Info info)
+        {
+            if (info.isFile)
+                return new System.Uri(info.path).AbsoluteUri;
+            else
+                return @"images/" + info.path + @".png";
+        }
+
+        private Info GetAwayLogoPath()
+        {
+            return logoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), Config.DefaultAwayLogo);
+        }
+
+        private Info GetHomeLogoPath()
+        {
+            return logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo);
         }
 
     }

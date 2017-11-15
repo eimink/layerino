@@ -9,6 +9,7 @@ namespace layerino
     static class Config
     {
         static public string LogoDirectory = @"\team_logos";
+        static public string BackgroundDirectory = @"\backgrounds";
         static public string DefaultHomeLogo = "default_home";
         static public string DefaultAwayLogo = "default_away";
     }
