@@ -15,8 +15,20 @@ namespace layerino
         [JsonProperty]
         public string TeamRightName { get; set; }
         [JsonProperty]
+        public string TeamLeftLogo { get; set; }
+        [JsonProperty]
+        public string TeamRightLogo { get; set; }
+        [JsonProperty]
         public int TeamLeftScore { get; set; }
         [JsonProperty]
         public int TeamRightScore { get; set; }
+        [JsonProperty]
+        public string HomeTeamName { get; set; }
+        [JsonProperty]
+        public string AwayTeamName { get; set; }
+        [JsonProperty]
+        public string HomeTeamLogo { get; set; }
+        [JsonProperty]
+        public string AwayTeamLogo { get; set; }
     }
 }

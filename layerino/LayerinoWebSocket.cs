@@ -14,10 +14,12 @@ namespace layerino
         {
             if (e.Data == "FRONT_CONNECT")
             {
-
                 Program.layerinoForm.OnClientConnected();
             }
-            Send(e.Data);
+            else
+            {
+                Send(e.Data);
+            }
         }
     }
 

@@ -34,9 +34,17 @@ function layerinoUpdate(socketInput) {
     if (socketInput === "MainFadeIn") mainFadeIn();
     else if (socketInput === "MainFadeOut") mainFadeOut();
     else {
+        console.dir(socketInput);
         var data = JSON.parse(socketInput);
         $.each(data, function (element_id, value) {
-            $("#"+element_id).html(value);
+            console.dir(element_id);
+            if (element_id != "HomeTeamLogo" && element_id != "AwayTeamLogo" && element_id != "TeamLeftLogo" && element_id != "TeamRightLogo") {
+                $("#"+element_id).html(value);
+            } else {
+                console.log("set logo");
+                $("#"+element_id).css("background-image", "url("+value+")");
+            }
+            
         });
     }
 }

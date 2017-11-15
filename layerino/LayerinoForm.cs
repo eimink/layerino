@@ -11,6 +11,7 @@ using WebSocketSharp;
 using WebSocketSharp.Server;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.IO;
 
 namespace layerino
 {
@@ -18,13 +19,14 @@ namespace layerino
     {
         private WebSocketServer wssv;
         private bool invertTeams = false;
+        private FileListing logoFiles;
 
         private GlobalHotkey[] ghks;
 
         public LayerinoForm()
         {
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
-
+            
             InitializeComponent();
             ghks = new GlobalHotkey[7];
             ghks[0] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D4, this);
@@ -34,10 +36,31 @@ namespace layerino
             ghks[4] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D8, this);
             ghks[5] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D9, this);
             ghks[6] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D0, this);
+
+            SetLogoBoxItems();
+
+            SetComboBoxSelected(ref logoBox1, "default_home");
+            SetComboBoxSelected(ref logoBox2, "default_away");
+
             wssv = new WebSocketServer(14329);
             wssv.Log.Level = LogLevel.Fatal;
             wssv.AddWebSocketService<LayerinoWebSocket>("/layerino");
             wssv.Start();
+        }
+
+        private void SetLogoBoxItems()
+        {
+            logoFiles = new FileListing(Directory.GetCurrentDirectory() + @"\team_logos");
+            foreach (string fn in logoFiles.GetFileNames())
+            {
+                logoBox1.Items.Add(fn);
+                logoBox2.Items.Add(fn);
+            }
+        }
+
+        private void SetComboBoxSelected(ref ComboBox comboBox, string selected)
+        {
+            comboBox.SelectedIndex = comboBox.FindString(selected);
         }
 
         private void OnApplicationExit(object sender, EventArgs e)
@@ -61,6 +84,7 @@ namespace layerino
             }
             catch (ArgumentNullException e)
             {
+                Debug.Write(e.Message);
             }
             finally
             {
@@ -125,12 +149,23 @@ namespace layerino
         private string BuildDataForRefresh()
         {
             RefreshData data = new RefreshData();
+            string homeTeamLogo = "";
+            string awayTeamLogo = "";
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                homeTeamLogo = new System.Uri(logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), "default_home")).AbsoluteUri;
+                awayTeamLogo = new System.Uri(logoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), "default_away")).AbsoluteUri;
+            });
+
             if (!invertTeams)
             {
                 data.TeamLeftName = this.team1Name.Text;
                 data.TeamRightName = this.team2Name.Text;
                 data.TeamLeftScore = Convert.ToInt32(this.team1Score.Text);
                 data.TeamRightScore = Convert.ToInt32(this.team2Score.Text);
+                data.TeamLeftLogo = homeTeamLogo;
+                data.TeamRightLogo = awayTeamLogo;
             }
             else
             {
@@ -138,8 +173,14 @@ namespace layerino
                 data.TeamRightName = this.team1Name.Text;
                 data.TeamLeftScore = Convert.ToInt32(this.team2Score.Text);
                 data.TeamRightScore = Convert.ToInt32(this.team1Score.Text);
+                data.TeamLeftLogo = awayTeamLogo;
+                data.TeamRightLogo = homeTeamLogo;
             }
-            
+            data.HomeTeamName = this.team1Name.Text;
+            data.AwayTeamName = this.team2Name.Text;
+            data.HomeTeamLogo = homeTeamLogo;
+            data.AwayTeamLogo = awayTeamLogo;
+
             return JsonConvert.SerializeObject(data,Formatting.Indented);
         }
 
@@ -196,5 +237,56 @@ namespace layerino
         {
             SendWebsocketDataRefresh();
         }
+
+        private void Team1Name_Changed(object sender, EventArgs e)
+        {
+            string text = this.team1Name.Text.ToLowerInvariant();
+            if (!logoBox1.Items.Contains(text))
+                text = "default_home";
+            logoBox1.SelectedIndex = logoBox1.FindString(text);
+        }
+
+        private void Team2Name_Changed(object sender, EventArgs e)
+        {
+            string text = this.team2Name.Text.ToLowerInvariant();
+            if (!logoBox2.Items.Contains(text))
+                text = "default_away";
+            logoBox2.SelectedIndex = logoBox2.FindString(text);
+        }
+
+        private void Team1Logo_Changed(object sender, EventArgs e)
+        {
+            Console.WriteLine("logo1");
+            if (pictureBox1.Image != null)
+                pictureBox1.Image.Dispose();
+            pictureBox1.Image = (Image)Image.FromFile(logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), "default_home")).Clone();
+            pictureBox1.Update();
+            pictureBox1.Refresh();
+        }
+
+        private void Team2Logo_Changed(object sender, EventArgs e)
+        {
+            if (pictureBox2.Image != null)
+                pictureBox2.Image.Dispose();
+            pictureBox2.Image = (Image)Image.FromFile(logoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), "default_away")).Clone();
+            pictureBox2.Update();
+            pictureBox2.Refresh();
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RefreshLogos_Click(object sender, EventArgs e)
+        {
+            SetLogoBoxItems();
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }
