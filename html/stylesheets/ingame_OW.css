@@ -5,11 +5,6 @@
 	-webkit-transition: translate3d(0, 0, 0);
 }
 
-@font-face {
-	font-family: "BigNoodleToo";
-	src: url(../font/bignoodletoo.woff);
-}
-
 html, body {
 	width: 1920px;
 	height: 1080px;

@@ -8,20 +8,16 @@
 	<script src="javascripts/jquery-3.2.1.js"></script>
 	<script src="javascripts/ws.js"></script>
 </head>
-<body onload="initializeWebsocket()">
-	<div id="team_container">
+<body class="overwatch" onload="initializeWebsocket()">
+	<div id="ow_team_container">
 		<div id="team_left" class="team">
 			<div id="HomeTeamLogo" style="background-image: url(images/default_home.png);" class="logo"></div>
-			<div id="HomeTeamName">Home Team</div>
-		</div>
-
-		<div id="versus">
-			vs	
+			<div id="HomeTeamName" class="ow_team_name ow_team_left">Home Team lol</div>
 		</div>
 
 		<div id="team_right" class="team">
 			<div id="AwayTeamLogo" style="background-image: url(images/default_away.png);" class="logo"></div>
-			<div id="AwayTeamName">Away Team</div>
+			<div id="AwayTeamName" class="ow_team_name ow_team_right">Away Team lol</div>
 		</div>
 	</div>
 </body>

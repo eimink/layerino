@@ -1,11 +1,11 @@
-@font-face {
+body {
+	background: transparent;
 	font-family: "BigNoodleToo";
-	src: url(../font/bignoodletoo.woff);
+	
 }
 
-body {
-	background: black;
-	font-family: "BigNoodleToo";
+.overwatch {
+	background-image: url(../images/overwatch.png);
 }
 
 #team_container {
@@ -15,6 +15,16 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 130px;
+	margin-bottom: 70px;
+}
+
+#ow_team_container {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 280px;
 	margin-bottom: 70px;
 }
 
@@ -42,6 +52,21 @@ body {
 .team img {
 	height: 400px;
 	width: 400px;
+}
+
+.ow_team_name {
+	font-size: 60px;
+	margin-top: 55px;
+}
+
+.ow_team_left {
+	text-align: left;
+	margin-left: 300px;
+}
+
+.ow_team_right {
+	text-align: right;
+	margin-right: 314px;
 }
 
 #next_event {
