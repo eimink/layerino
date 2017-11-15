@@ -39,8 +39,8 @@ namespace layerino
 
             SetLogoBoxItems();
 
-            SetComboBoxSelected(ref logoBox1, "default_home");
-            SetComboBoxSelected(ref logoBox2, "default_away");
+            SetComboBoxSelected(ref logoBox1, Config.DefaultHomeLogo);
+            SetComboBoxSelected(ref logoBox2, Config.DefaultAwayLogo);
 
             wssv = new WebSocketServer(14329);
             wssv.Log.Level = LogLevel.Fatal;
@@ -48,9 +48,18 @@ namespace layerino
             wssv.Start();
         }
 
+        private void CheckDirectories()
+        {
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + Config.LogoDirectory))
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + Config.LogoDirectory);
+            }
+            
+        }
+
         private void SetLogoBoxItems()
         {
-            logoFiles = new FileListing(Directory.GetCurrentDirectory() + @"\team_logos");
+            logoFiles = new FileListing(Directory.GetCurrentDirectory() + Config.LogoDirectory);
             foreach (string fn in logoFiles.GetFileNames())
             {
                 logoBox1.Items.Add(fn);
@@ -154,8 +163,8 @@ namespace layerino
 
             this.Invoke((MethodInvoker)delegate ()
             {
-                homeTeamLogo = new System.Uri(logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), "default_home")).AbsoluteUri;
-                awayTeamLogo = new System.Uri(logoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), "default_away")).AbsoluteUri;
+                homeTeamLogo = new System.Uri(logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo)).AbsoluteUri;
+                awayTeamLogo = new System.Uri(logoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), Config.DefaultAwayLogo)).AbsoluteUri;
             });
 
             if (!invertTeams)
@@ -242,7 +251,7 @@ namespace layerino
         {
             string text = this.team1Name.Text.ToLowerInvariant();
             if (!logoBox1.Items.Contains(text))
-                text = "default_home";
+                text = Config.DefaultHomeLogo;
             logoBox1.SelectedIndex = logoBox1.FindString(text);
         }
 
@@ -250,7 +259,7 @@ namespace layerino
         {
             string text = this.team2Name.Text.ToLowerInvariant();
             if (!logoBox2.Items.Contains(text))
-                text = "default_away";
+                text = Config.DefaultAwayLogo;
             logoBox2.SelectedIndex = logoBox2.FindString(text);
         }
 
@@ -259,7 +268,7 @@ namespace layerino
             Console.WriteLine("logo1");
             if (pictureBox1.Image != null)
                 pictureBox1.Image.Dispose();
-            pictureBox1.Image = (Image)Image.FromFile(logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), "default_home")).Clone();
+            pictureBox1.Image = (Image)Image.FromFile(logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo)).Clone();
             pictureBox1.Update();
             pictureBox1.Refresh();
         }
@@ -268,7 +277,7 @@ namespace layerino
         {
             if (pictureBox2.Image != null)
                 pictureBox2.Image.Dispose();
-            pictureBox2.Image = (Image)Image.FromFile(logoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), "default_away")).Clone();
+            pictureBox2.Image = (Image)Image.FromFile(logoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), Config.DefaultAwayLogo)).Clone();
             pictureBox2.Update();
             pictureBox2.Refresh();
         }
