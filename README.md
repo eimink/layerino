@@ -4,7 +4,7 @@ Built for using with The Kaupunkisota Overwatch tournament
 
 layerino consists of html pages and a control application for Windows
 
-![layerino](https://cdn.pbrd.co/images/GImSg9g.png)
+![layerino](https://cdn.pbrd.co/images/GTOfmbI.png)
 
 ## Instructions
 1) Build layerino or download binaries from [releases](https://github.com/eimink/layerino/releases/)
