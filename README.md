@@ -1,10 +1,16 @@
 # layerino
-Tournament layout system for use with OBS
-Built for using with The Kaupunkisota Overwatch tournament
+Tournament layout system for use with OBS Studio
 
-layerino consists of html pages and a control application for Windows
+Built initially for using with The Kaupunkisota Overwatch tournament, but has been used for other tournaments as well. :)
+
+layerino consists of html pages and a control application for Windows.
 
 ![layerino](https://cdn.pbrd.co/images/GTOfmbI.png)
+
+## Features
+* Top of the screen layer for displaying team names and map scores with easy team switching from side to side
+
+* Fullscreen layer for displaying teams and their logos for upcoming match
 
 ## Instructions
 1) Build layerino or download binaries from [releases](https://github.com/eimink/layerino/releases/)
@@ -35,3 +41,8 @@ CTRL + ALT + 9 = Refresh All
 
 CTRL + ALT + 0 = Toggle Visibility
 
+## Upcoming features
+
+* Template support for layers
+
+* Bracket system
