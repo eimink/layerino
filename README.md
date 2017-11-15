@@ -2,7 +2,7 @@
 Tournament layout system for use with OBS
 Built for using with The Kaupunkisota Overwatch tournament
 
-layerino consists of a html page and a control application for Windows
+layerino consists of html pages and a control application for Windows
 
 ![layerino](https://cdn.pbrd.co/images/GImSg9g.png)
 
@@ -11,9 +11,11 @@ layerino consists of a html page and a control application for Windows
 
 2) Run layerino.exe
 
-3) Add a BrowserSource to OBS and point it to local file html/ws.html from this repo.
+3) For in-game top of the screen layer, add a BrowserSource with size of 1920x1080 to OBS and point it to local file html/ingame_OW.html from this repo.
 
-4) Set team names in layerino & hit refresh
+4) For fullscreen layer with team names and logos, add a BrowserSource with size of 1920x1080 to OBS and point it to local file html/fullscreen_match.html from this repo.
+
+5) Set team names in layerino & hit refresh
 
 ## Hotkeys
 
