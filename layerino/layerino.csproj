@@ -105,6 +105,9 @@
   <ItemGroup>
     <Content Include="Icon1.ico" />
     <Content Include="MetroFramework.txt" />
+    <None Include="Resources\ruksi_transp.png" />
+    <None Include="Resources\ruksi.png" />
+    <None Include="Resources\layerino_title.png" />
     <None Include="Resources\default_away.png" />
     <None Include="Resources\default_home.png" />
   </ItemGroup>

@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.IO;
 using MetroFramework.Forms;
+using MetroFramework.Controls;
 
 namespace layerino
 {
@@ -77,7 +78,7 @@ namespace layerino
             }
         }
 
-        private void SetComboBoxSelected(ref ComboBox comboBox, string selected)
+        private void SetComboBoxSelected(ref MetroComboBox comboBox, string selected)
         {
             comboBox.SelectedIndex = comboBox.FindString(selected);
         }
@@ -306,6 +307,16 @@ namespace layerino
             Application.Exit();
         }
 
+        private void Exit_MouseEnter(object sender, EventArgs e)
+        {
+            ExitImage.Image = (Image)((Image)Properties.Resources.ResourceManager.GetObject("ruksi")).Clone();
+        }
+
+        private void Exit_MouseExit(object sender, EventArgs e)
+        {
+            ExitImage.Image = (Image)((Image)Properties.Resources.ResourceManager.GetObject("ruksi_transp")).Clone();
+        }
+
         private Image GetImage(Info info)
         {
             if (info.isFile)
@@ -332,9 +343,5 @@ namespace layerino
             return logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo);
         }
 
-        private void exitButton_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
     }
 }
