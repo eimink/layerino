@@ -52,6 +52,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.exitButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -69,6 +71,8 @@
             // 
             // team1Name
             // 
+            this.team1Name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.team1Name.ForeColor = System.Drawing.SystemColors.Control;
             this.team1Name.Location = new System.Drawing.Point(51, 27);
             this.team1Name.Name = "team1Name";
             this.team1Name.Size = new System.Drawing.Size(298, 20);
@@ -86,6 +90,8 @@
             // 
             // team2Name
             // 
+            this.team2Name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.team2Name.ForeColor = System.Drawing.SystemColors.Control;
             this.team2Name.Location = new System.Drawing.Point(51, 28);
             this.team2Name.Name = "team2Name";
             this.team2Name.Size = new System.Drawing.Size(298, 20);
@@ -103,6 +109,8 @@
             // 
             // team1Score
             // 
+            this.team1Score.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.team1Score.ForeColor = System.Drawing.SystemColors.Control;
             this.team1Score.Location = new System.Drawing.Point(405, 27);
             this.team1Score.Name = "team1Score";
             this.team1Score.Size = new System.Drawing.Size(50, 20);
@@ -121,6 +129,8 @@
             // 
             // team2Score
             // 
+            this.team2Score.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.team2Score.ForeColor = System.Drawing.SystemColors.Control;
             this.team2Score.Location = new System.Drawing.Point(405, 28);
             this.team2Score.Name = "team2Score";
             this.team2Score.Size = new System.Drawing.Size(50, 20);
@@ -130,72 +140,86 @@
             // 
             // team1ScoreInc
             // 
+            this.team1ScoreInc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.team1ScoreInc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.team1ScoreInc.Location = new System.Drawing.Point(371, 68);
             this.team1ScoreInc.Name = "team1ScoreInc";
             this.team1ScoreInc.Size = new System.Drawing.Size(38, 23);
             this.team1ScoreInc.TabIndex = 8;
             this.team1ScoreInc.Text = "+1";
-            this.team1ScoreInc.UseVisualStyleBackColor = true;
+            this.team1ScoreInc.UseVisualStyleBackColor = false;
             this.team1ScoreInc.Click += new System.EventHandler(this.Team1ScoreInc_Click);
             // 
             // team1ScoreDec
             // 
+            this.team1ScoreDec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.team1ScoreDec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.team1ScoreDec.Location = new System.Drawing.Point(415, 68);
             this.team1ScoreDec.Name = "team1ScoreDec";
             this.team1ScoreDec.Size = new System.Drawing.Size(38, 23);
             this.team1ScoreDec.TabIndex = 9;
             this.team1ScoreDec.Text = "-1";
-            this.team1ScoreDec.UseVisualStyleBackColor = true;
+            this.team1ScoreDec.UseVisualStyleBackColor = false;
             this.team1ScoreDec.Click += new System.EventHandler(this.Team1ScoreDec_Click);
             // 
             // team2ScoreInc
             // 
+            this.team2ScoreInc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.team2ScoreInc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.team2ScoreInc.Location = new System.Drawing.Point(371, 70);
             this.team2ScoreInc.Name = "team2ScoreInc";
             this.team2ScoreInc.Size = new System.Drawing.Size(38, 23);
             this.team2ScoreInc.TabIndex = 10;
             this.team2ScoreInc.Text = "+1";
-            this.team2ScoreInc.UseVisualStyleBackColor = true;
+            this.team2ScoreInc.UseVisualStyleBackColor = false;
             this.team2ScoreInc.Click += new System.EventHandler(this.Team2ScoreInc_Click);
             // 
             // team2ScoreDec
             // 
+            this.team2ScoreDec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.team2ScoreDec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.team2ScoreDec.Location = new System.Drawing.Point(415, 70);
             this.team2ScoreDec.Name = "team2ScoreDec";
             this.team2ScoreDec.Size = new System.Drawing.Size(38, 23);
             this.team2ScoreDec.TabIndex = 11;
             this.team2ScoreDec.Text = "-1";
-            this.team2ScoreDec.UseVisualStyleBackColor = true;
+            this.team2ScoreDec.UseVisualStyleBackColor = false;
             this.team2ScoreDec.Click += new System.EventHandler(this.Team2ScoreDec_Click);
             // 
             // toggleTopBar
             // 
-            this.toggleTopBar.Location = new System.Drawing.Point(12, 253);
+            this.toggleTopBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.toggleTopBar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.toggleTopBar.Location = new System.Drawing.Point(12, 275);
             this.toggleTopBar.Name = "toggleTopBar";
             this.toggleTopBar.Size = new System.Drawing.Size(96, 23);
             this.toggleTopBar.TabIndex = 12;
             this.toggleTopBar.Text = "Show top bar";
-            this.toggleTopBar.UseVisualStyleBackColor = true;
+            this.toggleTopBar.UseVisualStyleBackColor = false;
             this.toggleTopBar.Click += new System.EventHandler(this.ToggleTopBar_Click);
             // 
             // swapTeams
             // 
-            this.swapTeams.Location = new System.Drawing.Point(114, 253);
+            this.swapTeams.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.swapTeams.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.swapTeams.Location = new System.Drawing.Point(114, 275);
             this.swapTeams.Name = "swapTeams";
             this.swapTeams.Size = new System.Drawing.Size(96, 23);
             this.swapTeams.TabIndex = 13;
             this.swapTeams.Text = "Swap teams";
-            this.swapTeams.UseVisualStyleBackColor = true;
+            this.swapTeams.UseVisualStyleBackColor = false;
             this.swapTeams.Click += new System.EventHandler(this.SwapTeams_Click);
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(468, 253);
+            this.refreshButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.refreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.refreshButton.Location = new System.Drawing.Point(468, 275);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(96, 23);
             this.refreshButton.TabIndex = 14;
             this.refreshButton.Text = "Refresh";
-            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.UseVisualStyleBackColor = false;
             this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // label5
@@ -209,6 +233,9 @@
             // 
             // logoBox1
             // 
+            this.logoBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.logoBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logoBox1.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.logoBox1.FormattingEnabled = true;
             this.logoBox1.Location = new System.Drawing.Point(51, 70);
             this.logoBox1.Name = "logoBox1";
@@ -227,6 +254,9 @@
             // 
             // logoBox2
             // 
+            this.logoBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.logoBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logoBox2.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.logoBox2.FormattingEnabled = true;
             this.logoBox2.Location = new System.Drawing.Point(51, 72);
             this.logoBox2.Name = "logoBox2";
@@ -263,7 +293,8 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.team1Name);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(0, 12);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.groupBox1.Location = new System.Drawing.Point(-1, 34);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(578, 114);
             this.groupBox1.TabIndex = 23;
@@ -281,26 +312,64 @@
             this.groupBox2.Controls.Add(this.team2Score);
             this.groupBox2.Controls.Add(this.team2ScoreInc);
             this.groupBox2.Controls.Add(this.team2ScoreDec);
-            this.groupBox2.Location = new System.Drawing.Point(0, 132);
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.groupBox2.Location = new System.Drawing.Point(-1, 151);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(576, 115);
+            this.groupBox2.Size = new System.Drawing.Size(578, 115);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Away Team";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("BigNoodleToo", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(3, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(108, 20);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "eimink\'s layerino";
+            // 
+            // exitButton
+            // 
+            this.exitButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.exitButton.FlatAppearance.BorderSize = 0;
+            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitButton.Location = new System.Drawing.Point(550, 10);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(0);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(22, 22);
+            this.exitButton.TabIndex = 26;
+            this.exitButton.TabStop = false;
+            this.exitButton.Text = "X";
+            this.exitButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.exitButton.UseMnemonic = false;
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // LayerinoForm
             // 
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(576, 286);
+            this.ClientSize = new System.Drawing.Size(576, 311);
+            this.ControlBox = false;
+            this.Controls.Add(this.exitButton);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.swapTeams);
             this.Controls.Add(this.toggleTopBar);
+            this.DisplayHeader = false;
+            this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LayerinoForm";
+            this.Padding = new System.Windows.Forms.Padding(20, 30, 20, 20);
+            this.Resizable = false;
+            this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "eimink\'s layerino";
+            this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LayerinoForm_FormClosing);
             this.Load += new System.EventHandler(this.LayerinoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -310,6 +379,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -337,6 +407,8 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button exitButton;
     }
 }
 

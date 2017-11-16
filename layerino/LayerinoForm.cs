@@ -12,10 +12,11 @@ using WebSocketSharp.Server;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.IO;
+using MetroFramework.Forms;
 
 namespace layerino
 {
-    public partial class LayerinoForm : Form
+    public partial class LayerinoForm : MetroForm
     {
         private WebSocketServer wssv;
         private bool invertTeams = false;
@@ -331,5 +332,9 @@ namespace layerino
             return logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo);
         }
 
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
