@@ -83,6 +83,26 @@ namespace layerino.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ingame_shaded {
+            get {
+                object obj = ResourceManager.GetObject("ingame_shaded", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap kaupunkisota_logo {
+            get {
+                object obj = ResourceManager.GetObject("kaupunkisota_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap layerino_title {
             get {
                 object obj = ResourceManager.GetObject("layerino_title", resourceCulture);

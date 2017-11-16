@@ -21,9 +21,19 @@ namespace layerino
     {
         private WebSocketServer wssv;
         private bool invertTeams = false;
-        private FileListing logoFiles;
+        private FileListing teamLogoFiles;
+        private FileListing topLogoFiles;
+        private FileListing topOverlayFiles;
+        private string selectedTopLogo = "";
+        private string selectedTopOverlay = "";
 
         private GlobalHotkey[] ghks;
+
+        public string SelectedTopOverlay { get => selectedTopOverlay; set => selectedTopOverlay = value; }
+        public string SelectedTopLogo { get => selectedTopLogo; set => selectedTopLogo = value; }
+        public FileListing TopOverlayFiles { get => topOverlayFiles; set => topOverlayFiles = value; }
+        public FileListing TopLogoFiles { get => topLogoFiles; set => topLogoFiles = value; }
+        public FileListing TeamLogoFiles { get => teamLogoFiles; set => teamLogoFiles = value; }
 
         public LayerinoForm()
         {
@@ -40,8 +50,10 @@ namespace layerino
             ghks[5] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D9, this);
             ghks[6] = new GlobalHotkey(Constants.ALT + Constants.CTRL, Keys.D0, this);
 
-            SetLogoBoxItems();
-
+            SetTeamLogoBoxFiles();
+            SetTopLogoBoxFiles();
+            SetTopOverlayBoxFiles();
+            LoadConfiguration();
             SetComboBoxSelected(ref logoBox1, Config.DefaultHomeLogo);
             SetComboBoxSelected(ref logoBox2, Config.DefaultAwayLogo);
 
@@ -53,29 +65,48 @@ namespace layerino
 
         private void CheckDirectories()
         {
-            if (!Directory.Exists(Directory.GetCurrentDirectory() + Config.LogoDirectory))
+            List<string> directories = new List<String>();
+            directories.Add(Config.LogoDirectory);
+            directories.Add(Config.BackgroundDirectory);
+            directories.Add(Config.TopLogoDirectory);
+            directories.Add(Config.TopOverlayDirectory);
+            foreach (string dir in directories)
             {
-                string logoDir = Directory.GetCurrentDirectory() + Config.LogoDirectory;
-                Directory.CreateDirectory(logoDir);
+                if (!Directory.Exists(Directory.GetCurrentDirectory() + dir))
+                {
+                    string path = Directory.GetCurrentDirectory() + dir;
+                    Directory.CreateDirectory(path);
+                }
             }
-            if (!Directory.Exists(Directory.GetCurrentDirectory() + Config.BackgroundDirectory))
-            {
-                Directory.CreateDirectory(Directory.GetCurrentDirectory() + Config.BackgroundDirectory);
-            }
-
         }
 
-        private void SetLogoBoxItems()
+        private void SetTeamLogoBoxFiles()
         {
-            logoFiles = new FileListing();
-            logoFiles.Add(Config.DefaultHomeLogo, "default_home", false);
-            logoFiles.Add(Config.DefaultAwayLogo, "default_away", false);
-            logoFiles.ParseDirectory(Directory.GetCurrentDirectory() + Config.LogoDirectory);
-            foreach (string fn in logoFiles.GetFileNames())
+            TeamLogoFiles = new FileListing();
+            TeamLogoFiles.Add(Config.DefaultHomeLogo, Config.DefaultHomeLogo, false);
+            TeamLogoFiles.Add(Config.DefaultAwayLogo, Config.DefaultAwayLogo, false);
+            TeamLogoFiles.ParseDirectory(Directory.GetCurrentDirectory() + Config.LogoDirectory);
+            logoBox1.Items.Clear();
+            logoBox2.Items.Clear();
+            foreach (string fn in TeamLogoFiles.GetFileNames())
             {
                 logoBox1.Items.Add(fn);
                 logoBox2.Items.Add(fn);
             }
+        }
+
+        private void SetTopLogoBoxFiles()
+        {
+            TopLogoFiles = new FileListing();
+            TopLogoFiles.Add(Config.KaupunkiSotaLogo, Config.KaupunkiSotaLogo, false);
+            TopLogoFiles.ParseDirectory(Directory.GetCurrentDirectory() + Config.TopLogoDirectory);
+        }
+
+        private void SetTopOverlayBoxFiles()
+        {
+            TopOverlayFiles = new FileListing();
+            TopOverlayFiles.Add(Config.DefaultTopOverlay, Config.DefaultTopOverlay, false);
+            TopOverlayFiles.ParseDirectory(Directory.GetCurrentDirectory() + Config.TopOverlayDirectory);
         }
 
         private void SetComboBoxSelected(ref MetroComboBox comboBox, string selected)
@@ -200,8 +231,70 @@ namespace layerino
             data.AwayTeamName = this.team2Name.Text;
             data.HomeTeamLogo = homeTeamLogo;
             data.AwayTeamLogo = awayTeamLogo;
+            data.TopLogo = GetURIForLayer(GetTopLogoPath());
+            data.TopOverlay = GetURIForLayer(GetTopOverlayPath());
 
             return JsonConvert.SerializeObject(data,Formatting.Indented);
+        }
+
+        private string BuildDataForConfig()
+        {
+            ConfigData data = new ConfigData
+            {
+                HomeTeamName = this.team1Name.Text,
+                AwayTeamName = this.team2Name.Text,
+                HomeTeamScore = this.team1Score.Text,
+                AwayTeamScore = this.team2Score.Text,
+                TopLogo = SelectedTopLogo,
+                TopOverlay = SelectedTopOverlay
+            };
+            return JsonConvert.SerializeObject(data, Formatting.Indented);
+        }
+
+        private void SetDataToUI(ConfigData data)
+        {
+            team1Name.Text = data.HomeTeamName;
+            team2Name.Text = data.AwayTeamName;
+            team1Score.Text = data.HomeTeamScore;
+            team2Score.Text = data.AwayTeamScore;
+            SelectedTopLogo = data.TopLogo;
+            SelectedTopOverlay = data.TopOverlay;
+        }
+
+        public void SaveConfiguration()
+        {
+            string conf = BuildDataForConfig();
+            TextWriter writer = null;
+            try
+            {
+                writer = new StreamWriter(Directory.GetCurrentDirectory() + @"\config.json", false);
+                writer.Write(conf);
+            }
+            finally
+            {
+                if (writer != null)
+                    writer.Close();
+            }
+        }
+
+        public void LoadConfiguration()
+        {
+            string filePath = Directory.GetCurrentDirectory() + @"\config.json";
+            if (File.Exists(filePath))
+            {
+                TextReader reader = null;
+                try
+                {
+                    reader = new StreamReader(filePath);
+                    var fileContents = reader.ReadToEnd();
+                    SetDataToUI(JsonConvert.DeserializeObject<ConfigData>(fileContents));
+                }
+                finally
+                {
+                    if (reader != null)
+                        reader.Close();
+                }
+            }
         }
 
         private void SendWebsocketDataRefresh()
@@ -264,6 +357,7 @@ namespace layerino
             if (!logoBox1.Items.Contains(text))
                 text = Config.DefaultHomeLogo;
             logoBox1.SelectedIndex = logoBox1.FindString(text);
+            logoBox1.Focus();
         }
 
         private void Team2Name_Changed(object sender, EventArgs e)
@@ -272,6 +366,7 @@ namespace layerino
             if (!logoBox2.Items.Contains(text))
                 text = Config.DefaultAwayLogo;
             logoBox2.SelectedIndex = logoBox2.FindString(text);
+            logoBox2.Focus();
         }
 
         private void Team1Logo_Changed(object sender, EventArgs e)
@@ -294,16 +389,17 @@ namespace layerino
 
         private void Save_Click(object sender, EventArgs e)
         {
-
+            SaveConfiguration();
         }
 
         private void RefreshLogos_Click(object sender, EventArgs e)
         {
-            SetLogoBoxItems();
+            SetTeamLogoBoxFiles();
         }
 
         private void Exit_Click(object sender, EventArgs e)
         {
+            SaveConfiguration();
             Application.Exit();
         }
 
@@ -328,20 +424,44 @@ namespace layerino
         private string GetURIForLayer(Info info)
         {
             if (info.isFile)
-                return new System.Uri(info.path).AbsoluteUri;
+                return new Uri(info.path).AbsoluteUri;
             else
                 return @"images/" + info.path + @".png";
         }
 
         private Info GetAwayLogoPath()
         {
-            return logoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), Config.DefaultAwayLogo);
+            return TeamLogoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), Config.DefaultAwayLogo);
         }
 
         private Info GetHomeLogoPath()
         {
-            return logoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo);
+            return TeamLogoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo);
+        }
+        
+        private Info GetTopLogoPath()
+        {
+            return TopLogoFiles.GetFilePath(selectedTopLogo, Config.KaupunkiSotaLogo);
         }
 
+        private Info GetTopOverlayPath()
+        {
+            return TopOverlayFiles.GetFilePath(selectedTopOverlay, Config.DefaultTopOverlay);
+        }
+
+        public void RefreshDirectories()
+        {
+            SetTeamLogoBoxFiles();
+            SetTopLogoBoxFiles();
+            SetTopOverlayBoxFiles();
+            Team1Name_Changed(this, null);
+            Team2Name_Changed(this, null);
+        }
+
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            SettingsForm frm = new SettingsForm(this);
+            frm.Show();
+        }
     }
 }

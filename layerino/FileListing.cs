@@ -7,13 +7,13 @@ using System.IO;
 
 namespace layerino
 {
-    struct Info
+    public struct Info
     {
         public string path;
         public bool isFile;
     }
 
-    class FileListing
+    public class FileListing
     {
         private Dictionary<string,Info> files;
 

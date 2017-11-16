@@ -30,5 +30,9 @@ namespace layerino
         public string HomeTeamLogo { get; set; }
         [JsonProperty]
         public string AwayTeamLogo { get; set; }
+        [JsonProperty]
+        public string TopLogo { get; set; }
+        [JsonProperty]
+        public string TopOverlay { get; set; }
     }
 }

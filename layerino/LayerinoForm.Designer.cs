@@ -50,11 +50,11 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
             this.logoBox2 = new MetroFramework.Controls.MetroComboBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.ExitImage = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.settingsButton = new MetroFramework.Controls.MetroButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -90,8 +90,9 @@
             this.team2Name.ForeColor = System.Drawing.SystemColors.Control;
             this.team2Name.Location = new System.Drawing.Point(51, 28);
             this.team2Name.Name = "team2Name";
-            this.team2Name.Size = new System.Drawing.Size(298, 20);
+            this.team2Name.Size = new System.Drawing.Size(298, 23);
             this.team2Name.TabIndex = 3;
+            this.team2Name.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.team2Name.TextChanged += new System.EventHandler(this.Team2Name_Changed);
             // 
             // label4
@@ -239,12 +240,16 @@
             // 
             // logoBox1
             // 
+            this.logoBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoBox1.FormattingEnabled = true;
             this.logoBox1.ItemHeight = 23;
             this.logoBox1.Location = new System.Drawing.Point(50, 68);
+            this.logoBox1.MaxDropDownItems = 64;
             this.logoBox1.Name = "logoBox1";
             this.logoBox1.Size = new System.Drawing.Size(299, 29);
+            this.logoBox1.Style = MetroFramework.MetroColorStyle.Black;
             this.logoBox1.TabIndex = 26;
+            this.logoBox1.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.logoBox1.SelectedIndexChanged += new System.EventHandler(this.Team1Logo_Changed);
             // 
             // pictureBox1
@@ -260,7 +265,6 @@
             // 
             this.groupBox2.Controls.Add(this.metroLabel2);
             this.groupBox2.Controls.Add(this.metroLabel1);
-            this.groupBox2.Controls.Add(this.metroTextBox1);
             this.groupBox2.Controls.Add(this.logoBox2);
             this.groupBox2.Controls.Add(this.pictureBox2);
             this.groupBox2.Controls.Add(this.team2Name);
@@ -296,22 +300,18 @@
             this.metroLabel1.Text = "Name";
             this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
-            // metroTextBox1
-            // 
-            this.metroTextBox1.Location = new System.Drawing.Point(50, 28);
-            this.metroTextBox1.Name = "metroTextBox1";
-            this.metroTextBox1.Size = new System.Drawing.Size(299, 23);
-            this.metroTextBox1.TabIndex = 24;
-            this.metroTextBox1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
             // logoBox2
             // 
+            this.logoBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoBox2.FormattingEnabled = true;
             this.logoBox2.ItemHeight = 23;
             this.logoBox2.Location = new System.Drawing.Point(50, 70);
+            this.logoBox2.MaxDropDownItems = 64;
             this.logoBox2.Name = "logoBox2";
             this.logoBox2.Size = new System.Drawing.Size(299, 29);
+            this.logoBox2.Style = MetroFramework.MetroColorStyle.Black;
             this.logoBox2.TabIndex = 23;
+            this.logoBox2.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.logoBox2.SelectedIndexChanged += new System.EventHandler(this.Team2Logo_Changed);
             // 
             // pictureBox2
@@ -345,10 +345,21 @@
             this.pictureBox3.TabIndex = 27;
             this.pictureBox3.TabStop = false;
             // 
+            // settingsButton
+            // 
+            this.settingsButton.Location = new System.Drawing.Point(366, 275);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(96, 23);
+            this.settingsButton.TabIndex = 29;
+            this.settingsButton.Text = "Settings";
+            this.settingsButton.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.settingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
+            // 
             // LayerinoForm
             // 
             this.ClientSize = new System.Drawing.Size(576, 311);
             this.ControlBox = false;
+            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.ExitImage);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.groupBox2);
@@ -402,12 +413,12 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroTextBox metroTextBox1;
         private MetroFramework.Controls.MetroComboBox logoBox2;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroComboBox logoBox1;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox ExitImage;
+        private MetroFramework.Controls.MetroButton settingsButton;
     }
 }
 
