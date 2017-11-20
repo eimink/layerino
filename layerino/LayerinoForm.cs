@@ -65,11 +65,13 @@ namespace layerino
 
         private void CheckDirectories()
         {
-            List<string> directories = new List<String>();
-            directories.Add(Config.LogoDirectory);
-            directories.Add(Config.BackgroundDirectory);
-            directories.Add(Config.TopLogoDirectory);
-            directories.Add(Config.TopOverlayDirectory);
+            List<string> directories = new List<String>
+            {
+                Config.LogoDirectory,
+                Config.BackgroundDirectory,
+                Config.TopLogoDirectory,
+                Config.TopOverlayDirectory
+            };
             foreach (string dir in directories)
             {
                 if (!Directory.Exists(Directory.GetCurrentDirectory() + dir))
@@ -100,6 +102,12 @@ namespace layerino
             TopLogoFiles = new FileListing();
             TopLogoFiles.Add(Config.KaupunkiSotaLogo, Config.KaupunkiSotaLogo, false);
             TopLogoFiles.ParseDirectory(Directory.GetCurrentDirectory() + Config.TopLogoDirectory);
+            topLogoBox.Items.Clear();
+            foreach (string fn in TopLogoFiles.GetFileNames())
+            {
+                topLogoBox.Items.Add(fn);
+            }
+            topLogoBox.SelectedIndex = topLogoBox.FindString(SelectedTopLogo);
         }
 
         private void SetTopOverlayBoxFiles()
@@ -107,6 +115,12 @@ namespace layerino
             TopOverlayFiles = new FileListing();
             TopOverlayFiles.Add(Config.DefaultTopOverlay, Config.DefaultTopOverlay, false);
             TopOverlayFiles.ParseDirectory(Directory.GetCurrentDirectory() + Config.TopOverlayDirectory);
+            topOverlayBox.Items.Clear();
+            foreach (string fn in TopOverlayFiles.GetFileNames())
+            {
+                topOverlayBox.Items.Add(fn);
+            }
+            topOverlayBox.SelectedIndex = topOverlayBox.FindString(SelectedTopOverlay);
         }
 
         private void SetComboBoxSelected(ref MetroComboBox comboBox, string selected)
@@ -458,10 +472,14 @@ namespace layerino
             Team2Name_Changed(this, null);
         }
 
-        private void SettingsButton_Click(object sender, EventArgs e)
+        private void RescanButton_Click(object sender, EventArgs e)
         {
-            SettingsForm frm = new SettingsForm(this);
-            frm.Show();
+            RefreshDirectories();
+            topLogoBox.SelectedIndex = topLogoBox.FindString(SelectedTopLogo);
+            topOverlayBox.SelectedIndex = topOverlayBox.FindString(SelectedTopOverlay);
+            topLogoBox.Focus();
+            topOverlayBox.Focus();
+            rescanButton.Focus();
         }
     }
 }
