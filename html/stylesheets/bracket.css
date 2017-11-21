@@ -1,0 +1,204 @@
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-backface-visibility: hidden;
+	-webkit-transition: translate3d(0, 0, 0);
+}
+
+html, body {
+	width: 1920px;
+	height: 1080px;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased !important;
+}
+
+body {
+	font-family: "BigNoodleToo";
+	font-size: 48px;
+	color: #FFF;
+	background-size: cover;
+}
+
+#main {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1920px;
+	height: 1080px;
+	
+}
+
+#main::after {
+  content: "";
+  background-image: url(../images/bracket.png);
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+.bracket_name {
+	width: 300px;
+    height: 55px;
+    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 55px;
+    text-align: left;
+}
+
+.bracket_score {
+	width: 55px;
+    height: 55px;
+    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 55px;
+    text-align: center;
+}
+
+#Team1Name {
+	top: 138px;
+    left: 192px;
+}
+
+#Team1Score {
+	left: 486px;
+	top: 136px;
+}
+
+#Team2Name {
+	left: 192px;
+	top: 217px;
+}
+
+#Team2Score {
+	left: 486px;
+	top: 217px;
+}
+
+#Team3Name {
+	top: 363px;
+    left: 192px;
+}
+
+#Team3Score {
+	left: 486px;
+	top: 363px;
+}
+
+#Team4Name {
+	left: 192px;
+	top: 442px;
+}
+
+#Team4Score {
+	left: 486px;
+	top: 442px;
+}
+
+#Team5Name {
+	top: 590px;
+    left: 192px;
+}
+
+#Team5Score {
+	left: 486px;
+	top: 590px;
+}
+
+#Team6Name {
+	left: 192px;
+	top: 669px;
+}
+
+#Team6Score {
+	left: 486px;
+	top: 669px;
+}
+
+#Team7Name {
+	top: 810px;
+    left: 192px;
+}
+
+#Team7Score {
+	left: 486px;
+	top: 810px;
+}
+
+#Team8Name {
+	left: 192px;
+	top: 888px;
+}
+
+#Team8Score {
+	left: 486px;
+	top: 888px;
+}
+
+#Semi1Name {
+	top: 257px;
+    left: 782px;
+}
+
+#Semi1Score {
+	left: 1077px;
+	top: 257px;
+}
+
+#Semi2Name {
+	left: 782px;
+	top: 336px;
+}
+
+#Semi2Score {
+	left: 1077px;
+	top: 336px;
+}
+
+#Semi3Name {
+	top: 690px;
+    left: 782px;
+}
+
+#Semi3Score {
+	left: 1077px;
+	top: 690px;
+}
+
+#Semi4Name {
+	left: 782px;
+	top: 768px;
+}
+
+#Semi4Score {
+	left: 1077px;
+	top: 768px;
+}
+
+#Final1Name {
+	top: 473px;
+    left: 1376px;
+}
+
+#Final1Score {
+	left: 1670px;
+	top: 473px;
+}
+
+#Final2Name {
+	left: 1376px;
+	top: 551px;
+}
+
+#Final2Score {
+	left: 1670px;
+	top: 551px;
+}

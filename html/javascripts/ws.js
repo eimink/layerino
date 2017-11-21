@@ -34,11 +34,9 @@ function layerinoUpdate(socketInput) {
     if (socketInput === "MainFadeIn") mainFadeIn();
     else if (socketInput === "MainFadeOut") mainFadeOut();
     else {
-        console.dir(socketInput);
         var data = JSON.parse(socketInput);
         $.each(data, function (element_id, value) {
-            console.dir(element_id);
-            if (element_id != "HomeTeamLogo" && element_id != "AwayTeamLogo" && element_id != "TeamLeftLogo" && element_id != "TeamRightLogo") {
+            if (element_id != "HomeTeamLogo" && element_id != "AwayTeamLogo" && element_id != "TeamLeftLogo" && element_id != "TeamRightLogo" && element_id != "TopLogo" && element_id != "TopOverlay") {
                 $("#"+element_id).html(value);
             } else {
                 console.log("set logo");

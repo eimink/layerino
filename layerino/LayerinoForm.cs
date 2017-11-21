@@ -225,28 +225,60 @@ namespace layerino
 
             if (!invertTeams)
             {
-                data.TeamLeftName = this.team1Name.Text;
-                data.TeamRightName = this.team2Name.Text;
-                data.TeamLeftScore = Convert.ToInt32(this.team1Score.Text);
-                data.TeamRightScore = Convert.ToInt32(this.team2Score.Text);
+                data.TeamLeftName = team1Name.Text;
+                data.TeamRightName = team2Name.Text;
+                data.TeamLeftScore = Convert.ToInt32(team1Score.Text);
+                data.TeamRightScore = Convert.ToInt32(team2Score.Text);
                 data.TeamLeftLogo = homeTeamLogo;
                 data.TeamRightLogo = awayTeamLogo;
             }
             else
             {
-                data.TeamLeftName = this.team2Name.Text;
-                data.TeamRightName = this.team1Name.Text;
-                data.TeamLeftScore = Convert.ToInt32(this.team2Score.Text);
-                data.TeamRightScore = Convert.ToInt32(this.team1Score.Text);
+                data.TeamLeftName = team2Name.Text;
+                data.TeamRightName = team1Name.Text;
+                data.TeamLeftScore = Convert.ToInt32(team2Score.Text);
+                data.TeamRightScore = Convert.ToInt32(team1Score.Text);
                 data.TeamLeftLogo = awayTeamLogo;
                 data.TeamRightLogo = homeTeamLogo;
             }
-            data.HomeTeamName = this.team1Name.Text;
-            data.AwayTeamName = this.team2Name.Text;
+            data.HomeTeamName = team1Name.Text;
+            data.AwayTeamName = team2Name.Text;
             data.HomeTeamLogo = homeTeamLogo;
             data.AwayTeamLogo = awayTeamLogo;
             data.TopLogo = GetURIForLayer(GetTopLogoPath());
             data.TopOverlay = GetURIForLayer(GetTopOverlayPath());
+
+            // Bracket
+            data.Team1Name = bracketTeam1TextBox.Text;
+            data.Team2Name = bracketTeam2TextBox.Text;
+            data.Team3Name = bracketTeam3TextBox.Text;
+            data.Team4Name = bracketTeam4TextBox.Text;
+            data.Team5Name = bracketTeam5TextBox.Text;
+            data.Team6Name = bracketTeam6TextBox.Text;
+            data.Team7Name = bracketTeam7TextBox.Text;
+            data.Team8Name = bracketTeam8TextBox.Text;
+            data.Semi1Name = semiTeam1TextBox.Text;
+            data.Semi2Name = semiTeam2TextBox.Text;
+            data.Semi3Name = semiTeam3TextBox.Text;
+            data.Semi4Name = semiTeam4TextBox.Text;
+            data.Final1Name = finalTeam1TextBox.Text;
+            data.Final2Name = finalTeam2TextBox.Text;
+            data.Team1Score = Convert.ToInt32(bracketTeam1Score.Text);
+            data.Team2Score = Convert.ToInt32(bracketTeam2Score.Text);
+            data.Team3Score = Convert.ToInt32(bracketTeam3Score.Text);
+            data.Team4Score = Convert.ToInt32(bracketTeam4Score.Text);
+            data.Team5Score = Convert.ToInt32(bracketTeam5Score.Text);
+            data.Team6Score = Convert.ToInt32(bracketTeam6Score.Text);
+            data.Team7Score = Convert.ToInt32(bracketTeam7Score.Text);
+            data.Team8Score = Convert.ToInt32(bracketTeam8Score.Text);
+            data.Semi1Score = Convert.ToInt32(semiTeam1Score.Text);
+            data.Semi2Score = Convert.ToInt32(semiTeam2Score.Text);
+            data.Semi3Score = Convert.ToInt32(semiTeam1Score.Text);
+            data.Semi4Score = Convert.ToInt32(semiTeam2Score.Text);
+            data.Final1Score = Convert.ToInt32(finalTeam1Score.Text);
+            data.Final2Score = Convert.ToInt32(finalTeam2Score.Text);
+
+
 
             return JsonConvert.SerializeObject(data,Formatting.Indented);
         }
@@ -262,6 +294,34 @@ namespace layerino
                 TopLogo = SelectedTopLogo,
                 TopOverlay = SelectedTopOverlay
             };
+            data.Team1Name = bracketTeam1TextBox.Text;
+            data.Team2Name = bracketTeam2TextBox.Text;
+            data.Team3Name = bracketTeam3TextBox.Text;
+            data.Team4Name = bracketTeam4TextBox.Text;
+            data.Team5Name = bracketTeam5TextBox.Text;
+            data.Team6Name = bracketTeam6TextBox.Text;
+            data.Team7Name = bracketTeam7TextBox.Text;
+            data.Team8Name = bracketTeam8TextBox.Text;
+            data.Semi1Name = semiTeam1TextBox.Text;
+            data.Semi2Name = semiTeam2TextBox.Text;
+            data.Semi3Name = semiTeam3TextBox.Text;
+            data.Semi4Name = semiTeam4TextBox.Text;
+            data.Final1Name = finalTeam1TextBox.Text;
+            data.Final2Name = finalTeam2TextBox.Text;
+            data.Team1Score = Convert.ToInt32(bracketTeam1Score.Text);
+            data.Team2Score = Convert.ToInt32(bracketTeam2Score.Text);
+            data.Team3Score = Convert.ToInt32(bracketTeam3Score.Text);
+            data.Team4Score = Convert.ToInt32(bracketTeam4Score.Text);
+            data.Team5Score = Convert.ToInt32(bracketTeam5Score.Text);
+            data.Team6Score = Convert.ToInt32(bracketTeam6Score.Text);
+            data.Team7Score = Convert.ToInt32(bracketTeam7Score.Text);
+            data.Team8Score = Convert.ToInt32(bracketTeam8Score.Text);
+            data.Semi1Score = Convert.ToInt32(semiTeam1Score.Text);
+            data.Semi2Score = Convert.ToInt32(semiTeam2Score.Text);
+            data.Semi3Score = Convert.ToInt32(semiTeam3Score.Text);
+            data.Semi4Score = Convert.ToInt32(semiTeam4Score.Text);
+            data.Final1Score = Convert.ToInt32(finalTeam1Score.Text);
+            data.Final2Score = Convert.ToInt32(finalTeam2Score.Text);
             return JsonConvert.SerializeObject(data, Formatting.Indented);
         }
 
@@ -273,6 +333,34 @@ namespace layerino
             team2Score.Text = data.AwayTeamScore;
             SelectedTopLogo = data.TopLogo;
             SelectedTopOverlay = data.TopOverlay;
+            bracketTeam1TextBox.Text = data.Team1Name;
+            bracketTeam2TextBox.Text = data.Team2Name;
+            bracketTeam3TextBox.Text = data.Team3Name;
+            bracketTeam4TextBox.Text = data.Team4Name;
+            bracketTeam5TextBox.Text = data.Team5Name;
+            bracketTeam6TextBox.Text = data.Team6Name;
+            bracketTeam7TextBox.Text = data.Team7Name;
+            bracketTeam8TextBox.Text = data.Team8Name;
+            semiTeam1TextBox.Text = data.Semi1Name;
+            semiTeam2TextBox.Text = data.Semi2Name;
+            semiTeam3TextBox.Text = data.Semi3Name;
+            semiTeam4TextBox.Text = data.Semi4Name;
+            finalTeam1TextBox.Text = data.Final1Name;
+            finalTeam2TextBox.Text = data.Final2Name;
+            bracketTeam1Score.Text = Convert.ToString(data.Team1Score);
+            bracketTeam2Score.Text = Convert.ToString(data.Team2Score);
+            bracketTeam3Score.Text = Convert.ToString(data.Team3Score);
+            bracketTeam4Score.Text = Convert.ToString(data.Team4Score);
+            bracketTeam5Score.Text = Convert.ToString(data.Team5Score);
+            bracketTeam6Score.Text = Convert.ToString(data.Team6Score);
+            bracketTeam7Score.Text = Convert.ToString(data.Team7Score);
+            bracketTeam8Score.Text = Convert.ToString(data.Team8Score);
+            semiTeam1Score.Text = Convert.ToString(data.Semi1Score);
+            semiTeam2Score.Text = Convert.ToString(data.Semi2Score);
+            semiTeam3Score.Text = Convert.ToString(data.Semi3Score);
+            semiTeam4Score.Text = Convert.ToString(data.Semi4Score);
+            finalTeam1Score.Text = Convert.ToString(data.Final1Score);
+            finalTeam2Score.Text = Convert.ToString(data.Final2Score);
         }
 
         public void SaveConfiguration()
@@ -480,6 +568,11 @@ namespace layerino
             topLogoBox.Focus();
             topOverlayBox.Focus();
             rescanButton.Focus();
+        }
+
+        private void MetroButton1_Click(object sender, EventArgs e)
+        {
+            RefreshButton_Click(sender, e);
         }
     }
 }

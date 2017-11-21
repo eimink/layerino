@@ -22,13 +22,13 @@ body {
 	background-size: cover;
 }
 
-#main {
+#TopOverlay {
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: 100%;
+	width: 1920px;
 	height: 43px;
-	background-image: url(../images/ingame_OW_kaupunkisota.png);
+	background-image: url(../images/ingame_shaded.png);
 }
 
 #TeamLeftName {
@@ -65,15 +65,14 @@ body {
 	text-align: center;
 }
 
-#center_logo {
+#TopLogo {
 	position: absolute;
 	width: 1920px;
-	height: 40px;
-	visibility: hidden;
-	background-position: center;
+	height: 43px;
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-image: url(../images/thekaupunkisota.png);
+	background-position: center;
+	background-image: url(../images/kaupunkisota_logo.png);
 }
 
 #side_logo {
