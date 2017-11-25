@@ -5,12 +5,16 @@ Built initially for using with The Kaupunkisota Overwatch tournament, but has be
 
 layerino consists of html pages and a control application for Windows.
 
-![layerino](https://cdn.pbrd.co/images/GTOfmbI.png)
+![layerino](https://cdn.pbrd.co/images/GVhLxJy.png)
 
 ## Features
 * Top of the screen layer for displaying team names and map scores with easy team switching from side to side
 
 * Fullscreen layer for displaying teams and their logos for upcoming match
+
+* Simple BO8 bracket
+
+* Easily switchable top logos and overlay graphics for in-game overlay
 
 ## Instructions
 1) Build layerino or download binaries from [releases](https://github.com/eimink/layerino/releases/)
@@ -43,6 +47,4 @@ CTRL + ALT + 0 = Toggle Visibility
 
 ## Upcoming features
 
-* Template support for layers
-
-* Bracket system
+* More options for brackets
