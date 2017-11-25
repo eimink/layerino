@@ -589,7 +589,7 @@
             this.metroTabControl1.Controls.Add(this.settingsTab);
             this.metroTabControl1.Location = new System.Drawing.Point(1, 36);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(602, 338);
             this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Orange;

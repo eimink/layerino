@@ -75,10 +75,7 @@ namespace layerino
                 return files[key];
             else
             {
-                Info i = new Info();
-                i.path = "";
-                i.isFile = true;
-                return i;
+                return files[def];
             }
         }
     }

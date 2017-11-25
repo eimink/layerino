@@ -24,8 +24,8 @@ namespace layerino
         private FileListing teamLogoFiles;
         private FileListing topLogoFiles;
         private FileListing topOverlayFiles;
-        private string selectedTopLogo = "";
-        private string selectedTopOverlay = "";
+        private string selectedTopLogo = Config.KaupunkiSotaLogo;
+        private string selectedTopOverlay = Config.DefaultTopOverlay;
 
         private GlobalHotkey[] ghks;
 
@@ -53,10 +53,12 @@ namespace layerino
             SetTeamLogoBoxFiles();
             SetTopLogoBoxFiles();
             SetTopOverlayBoxFiles();
-            LoadConfiguration();
             SetComboBoxSelected(ref logoBox1, Config.DefaultHomeLogo);
             SetComboBoxSelected(ref logoBox2, Config.DefaultAwayLogo);
-
+            SetComboBoxSelected(ref topOverlayBox, Config.DefaultTopOverlay);
+            SetComboBoxSelected(ref topLogoBox, Config.KaupunkiSotaLogo);
+            LoadConfiguration();
+            
             wssv = new WebSocketServer(14329);
             wssv.Log.Level = LogLevel.Fatal;
             wssv.AddWebSocketService<LayerinoWebSocket>("/layerino");
@@ -107,7 +109,6 @@ namespace layerino
             {
                 topLogoBox.Items.Add(fn);
             }
-            topLogoBox.SelectedIndex = topLogoBox.FindString(SelectedTopLogo);
         }
 
         private void SetTopOverlayBoxFiles()
@@ -120,7 +121,6 @@ namespace layerino
             {
                 topOverlayBox.Items.Add(fn);
             }
-            topOverlayBox.SelectedIndex = topOverlayBox.FindString(SelectedTopOverlay);
         }
 
         private void SetComboBoxSelected(ref MetroComboBox comboBox, string selected)
@@ -221,6 +221,9 @@ namespace layerino
             {
                 homeTeamLogo = GetURIForLayer(GetHomeLogoPath());
                 awayTeamLogo = GetURIForLayer(GetAwayLogoPath());
+                selectedTopLogo = GetURIForLayer(GetTopLogoPath());
+                selectedTopOverlay = GetURIForLayer(GetTopOverlayPath());
+
             });
 
             if (!invertTeams)
@@ -245,8 +248,8 @@ namespace layerino
             data.AwayTeamName = team2Name.Text;
             data.HomeTeamLogo = homeTeamLogo;
             data.AwayTeamLogo = awayTeamLogo;
-            data.TopLogo = GetURIForLayer(GetTopLogoPath());
-            data.TopOverlay = GetURIForLayer(GetTopOverlayPath());
+            data.TopLogo = SelectedTopLogo;
+            data.TopOverlay = SelectedTopOverlay;
 
             // Bracket
             data.Team1Name = bracketTeam1TextBox.Text;
@@ -291,8 +294,8 @@ namespace layerino
                 AwayTeamName = this.team2Name.Text,
                 HomeTeamScore = this.team1Score.Text,
                 AwayTeamScore = this.team2Score.Text,
-                TopLogo = SelectedTopLogo,
-                TopOverlay = SelectedTopOverlay
+                TopLogo = topLogoBox.GetItemText(topLogoBox.SelectedItem),
+                TopOverlay = topOverlayBox.GetItemText(topOverlayBox.SelectedItem)
             };
             data.Team1Name = bracketTeam1TextBox.Text;
             data.Team2Name = bracketTeam2TextBox.Text;
@@ -331,8 +334,8 @@ namespace layerino
             team2Name.Text = data.AwayTeamName;
             team1Score.Text = data.HomeTeamScore;
             team2Score.Text = data.AwayTeamScore;
-            SelectedTopLogo = data.TopLogo;
-            SelectedTopOverlay = data.TopOverlay;
+            topLogoBox.SelectedIndex = topLogoBox.FindString(data.TopLogo);
+            topOverlayBox.SelectedIndex = topOverlayBox.FindString(data.TopOverlay);
             bracketTeam1TextBox.Text = data.Team1Name;
             bracketTeam2TextBox.Text = data.Team2Name;
             bracketTeam3TextBox.Text = data.Team3Name;
@@ -531,25 +534,13 @@ namespace layerino
                 return @"images/" + info.path + @".png";
         }
 
-        private Info GetAwayLogoPath()
-        {
-            return TeamLogoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), Config.DefaultAwayLogo);
-        }
+        private Info GetAwayLogoPath() => TeamLogoFiles.GetFilePath(logoBox2.GetItemText(logoBox2.SelectedItem), Config.DefaultAwayLogo);
 
-        private Info GetHomeLogoPath()
-        {
-            return TeamLogoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo);
-        }
-        
-        private Info GetTopLogoPath()
-        {
-            return TopLogoFiles.GetFilePath(selectedTopLogo, Config.KaupunkiSotaLogo);
-        }
+        private Info GetHomeLogoPath() => TeamLogoFiles.GetFilePath(logoBox1.GetItemText(logoBox1.SelectedItem), Config.DefaultHomeLogo);
 
-        private Info GetTopOverlayPath()
-        {
-            return TopOverlayFiles.GetFilePath(selectedTopOverlay, Config.DefaultTopOverlay);
-        }
+        private Info GetTopLogoPath() => TopLogoFiles.GetFilePath(topLogoBox.GetItemText(topLogoBox.SelectedItem), Config.KaupunkiSotaLogo);
+
+        private Info GetTopOverlayPath() => TopOverlayFiles.GetFilePath(topOverlayBox.GetItemText(topOverlayBox.SelectedItem), Config.DefaultTopOverlay);
 
         public void RefreshDirectories()
         {
@@ -562,9 +553,11 @@ namespace layerino
 
         private void RescanButton_Click(object sender, EventArgs e)
         {
+            string topLogo = topLogoBox.GetItemText(topLogoBox.SelectedItem);
+            string topOverlay = topOverlayBox.GetItemText(topOverlayBox.SelectedItem);
             RefreshDirectories();
-            topLogoBox.SelectedIndex = topLogoBox.FindString(SelectedTopLogo);
-            topOverlayBox.SelectedIndex = topOverlayBox.FindString(SelectedTopOverlay);
+            topLogoBox.SelectedIndex = topLogoBox.FindString(topLogo);
+            topOverlayBox.SelectedIndex = topOverlayBox.FindString(topOverlay);
             topLogoBox.Focus();
             topOverlayBox.Focus();
             rescanButton.Focus();
