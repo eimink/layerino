@@ -12,7 +12,7 @@ layerino consists of html pages and a control application for Windows.
 
 * Fullscreen layer for displaying teams and their logos for upcoming match
 
-* Simple BO8 bracket
+* Simple eight team bracket
 
 * Easily switchable top logos and overlay graphics for in-game overlay
 
