@@ -461,8 +461,8 @@ namespace layerino
             string text = this.team1Name.Text.ToLowerInvariant();
             if (!logoBox1.Items.Contains(text))
                 text = Config.DefaultHomeLogo;
-            logoBox1.SelectedIndex = logoBox1.FindString(text);
-            logoBox1.Focus();
+            if (text != logoBox1.GetItemText(logoBox1.SelectedItem))
+                logoBox1.SelectedIndex = logoBox1.FindString(text);
         }
 
         private void Team2Name_Changed(object sender, EventArgs e)
@@ -470,8 +470,8 @@ namespace layerino
             string text = this.team2Name.Text.ToLowerInvariant();
             if (!logoBox2.Items.Contains(text))
                 text = Config.DefaultAwayLogo;
-            logoBox2.SelectedIndex = logoBox2.FindString(text);
-            logoBox2.Focus();
+            if (text != logoBox2.GetItemText(logoBox2.SelectedItem))
+                logoBox2.SelectedIndex = logoBox2.FindString(text);
         }
 
         private void Team1Logo_Changed(object sender, EventArgs e)
