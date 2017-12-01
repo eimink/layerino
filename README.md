@@ -48,3 +48,7 @@ CTRL + ALT + 0 = Toggle Visibility
 ## Upcoming features
 
 * More options for brackets
+
+## Show some support
+
+If you wish to support development of Layerino, feel free to buy me a beer or lunch when we meet at Assembly/LanTrek/??? or on the streets or throw your monies at me via [paypal.me/eimink](https://paypal.me/eimink)
