@@ -26,6 +26,7 @@ namespace layerino
         private FileListing topOverlayFiles;
         private string selectedTopLogo = Config.KaupunkiSotaLogo;
         private string selectedTopOverlay = Config.DefaultTopOverlay;
+        private Uri appUri = new Uri(Application.ExecutablePath);
 
         private GlobalHotkey[] ghks;
 
@@ -529,7 +530,7 @@ namespace layerino
         private string GetURIForLayer(Info info)
         {
             if (info.isFile)
-                return new Uri(info.path).AbsoluteUri;
+                return @"../" + appUri.MakeRelativeUri(new Uri(info.path)).ToString();
             else
                 return @"images/" + info.path + @".png";
         }
