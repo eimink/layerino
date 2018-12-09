@@ -367,13 +367,23 @@ namespace layerino
             finalTeam2Score.Text = Convert.ToString(data.Final2Score);
         }
 
+        private string GetAppFolderPath()
+        {
+            string path = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.ApplicationData ), Application.ProductName );
+            if ( !Directory.Exists( path ) )
+            {
+                Directory.CreateDirectory( path );
+            }
+            return path;
+        }
+
         public void SaveConfiguration()
         {
             string conf = BuildDataForConfig();
             TextWriter writer = null;
             try
             {
-                writer = new StreamWriter(Directory.GetCurrentDirectory() + @"\config.json", false);
+                writer = new StreamWriter( Path.Combine( GetAppFolderPath(), @"config.json" ), false );
                 writer.Write(conf);
             }
             finally
@@ -385,7 +395,7 @@ namespace layerino
 
         public void LoadConfiguration()
         {
-            string filePath = Directory.GetCurrentDirectory() + @"\config.json";
+            string filePath = Path.Combine( GetAppFolderPath(), @"config.json" );
             if (File.Exists(filePath))
             {
                 TextReader reader = null;
